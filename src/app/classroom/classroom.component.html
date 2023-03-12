@@ -1,0 +1,50 @@
+<div class="container-fluid p-3">
+
+    <div *ngIf="listClassRoom.length == 0" class="no-results">
+        <img class="img-no-results"   src="assets/icon/no-results.png" alt="">
+        <div> <b>ไม่พบข้อมูล</b></div>
+  
+       <div class="mb-3 mt-5 row">
+        <div class="d-flex justify-content-center">
+          <button (click)="openModalJoinClass()" type="button" class="btn btn-primary px-5 m-2">เข้าร่วมชั้นเรียน</button>
+          <button (click)="openModalCreateClassRoom()" class="btn btn-primary px-5 m-2" type="button">สร้างชั้นเรียน</button>
+  
+        </div>
+      </div>
+  
+    </div>
+  
+    <div class="row">
+      <div  class="col-lg-3 my-2" *ngFor="let item of listClassRoom; let i=index">
+      <div class="card" (click)="goToClassRoomManage(item)">
+        <div class="card-header" style="background-color: #0d6efd;color: white;">
+          <b class="text-ellipsis">{{item?.classroom?.nameClassRoom}}</b>
+          <pre class="fw-normal text-ellipsis">{{item?.classroom?.classRoomNumber}}</pre>
+  
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{item?.classroom?.descriptionClassRoom}}</p>
+        </div>
+      </div>
+  
+    </div>
+    </div>
+  
+  </div>
+  
+  <div class="manage">
+    <div class="btn-group dropup ">
+      <button type="button" class="btn btn-info btn-manage cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+        +
+      </button>
+      <ul class="dropdown-menu">
+        <li><a (click)="openModalJoinClass()" class="dropdown-item">เข้าร่วมชั้นเรียน</a></li>
+        <li><a (click)="openModalCreateClassRoom()" class="dropdown-item">สร้างชั้นเรียน</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <app-join-class  (returnEventCreate)="getListClassRoomJoin()" [(joinClassModalVisible)]="joinClassModalVisible"></app-join-class>
+  <app-create-class-room [mode]="'CREATE'" (returnEventCreate)="getListClassRoomJoin()" [(createClassRoomModalVisible)]="createClassRoomModalVisible"></app-create-class-room>
+  
+  

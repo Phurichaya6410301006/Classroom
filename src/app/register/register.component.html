@@ -1,0 +1,44 @@
+<div class="container">
+    <form class="row g-3 needs-validation" novalidate>
+      <div class="col-lg-6 p-5 align-self-center offset-lg-3">
+       <h4>Register</h4>
+  
+       <div class="mb-3 mt-5 row">
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Name</label>
+          <input [(ngModel)]="formModel.name" type="text" class="form-control" id="inputName" name="inputName" required>
+        </div>
+      </div>
+  
+       <div class="mb-3 row">
+         <div class="mb-3">
+           <label for="inputEmailaddress" class="form-label">Email address</label>
+           <input [(ngModel)]="formModel.email" type="email" class="form-control" id="inputEmailaddress" name="inputEmailaddress" placeholder="name@example.com" required>
+         </div>
+       </div>
+  
+       <div class="mb-3 row">
+         <div class="mb-3">
+           <label for="inputPassword" class="form-label">Password</label>
+           <input [(ngModel)]="formModel.password" type="password" class="form-control" id="inputPassword" name="inputPassword" required>
+         </div>
+       </div>
+  
+       <div class="mb-3 row">
+        <div class="mb-3">
+          <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+          <input [(ngModel)]="formModel.confirmPassword" type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" required>
+        </div>
+      </div>
+  
+       <div class="mb-3 row">
+        <div class="d-flex justify-content-between">
+          <button [routerLink]="['/login']" type="button" class="btn btn-light px-5 my-2">Cancel</button>
+          <button (click)="createUser()" class="btn btn-primary px-5 my-2" type="button">Sign up</button>
+  
+        </div>
+      </div>
+      </div>
+     </form>
+  </div>
+  

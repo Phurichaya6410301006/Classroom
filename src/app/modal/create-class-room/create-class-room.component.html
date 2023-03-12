@@ -1,0 +1,60 @@
+<div class="modal fade " id="createClassRoomModalId" tabindex="-1" aria-labelledby="messageAlertModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{mode == 'CREATE'? 'สร้างชั้นเรียน':'แก้ไขชั้นเรียน'}} </h1>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="classroom-needs-validation" novalidate>
+    <div class="row mt-3">
+          <div class="col-lg-6 offset-lg-3">
+           <div class="card w-100">
+          <div class="card-body">
+            <p class="fw-bold">รายละเอียดของชั้นเรียน</p>
+
+            <div class="row">
+
+              <div class="col-lg-12 mb-3 ">
+                <label for="inputnameClassRoom" class="form-label">ชื่อชั้นเรียน (ต้องระบุ)</label>
+                <input [(ngModel)]="formModel.nameClassRoom" type="text" class="form-control" id="inputnameClassRoom" name="inputnameClassRoom"  required>
+              </div>
+
+              <div class="col-lg-12 mb-3 ">
+                <label for="inputnameClassRoom" class="form-label">คำอธิบายชั้นเรียน</label>
+                <textarea [(ngModel)]="formModel.descriptionClassRoom" class="form-control" id="inputdescriptionClassRoom" name="inputdescriptionClassRoom" rows="3"></textarea>
+
+              </div>
+
+              <div class="col-lg-12 mb-3 ">
+                <label for="inputnameClassRoom" class="form-label">ห้อง</label>
+                <input [(ngModel)]="formModel.classRoomNumber" type="text" class="form-control" id="inputdclassRoomNumber" name="inputdclassRoomNumber">
+              </div>
+
+              <div class="col-lg-12 mb-3 ">
+                <label for="inputnameClassRoom" class="form-label">เรื่อง</label>
+                <input [(ngModel)]="formModel.subject" type="text" class="form-control" id="inputdsubject" name="inputdsubject" >
+              </div>
+
+            </div>
+
+            <div class="mb-3 mt-5 row">
+              <div class="col-lg-12 text-center">
+                <button (click)="onClickBtnSaveClassRoom()" class="btn btn-primary px-5" type="button">บันทึก</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+          </div>
+        </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>

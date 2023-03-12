@@ -1,0 +1,56 @@
+<div class="container-fluid p-3">
+
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+       <div class="card w-100">
+      <div class="card-body">
+        <button *ngIf="modeMamage == 'NO_EDIT'"  type="button" class="btn-close btn-edit-absolute"  (click)="modeMamage = 'EDIT'"  aria-label="Close"></button>
+        <div *ngIf="modeMamage == 'EDIT'" class="d-flex justify-content-end ab-btn">
+          <button  (click)="modeMamage = 'NO_EDIT';setForm()" type="button" class="btn btn-light  m-2">ยกเลิก</button>
+          <button  (click)="onClickBtnManage()"  class="btn btn-primary m-2" type="button">บันทึก</button>
+  
+        </div>
+        <p class="fst-normal">ขณะนี้คุณกำลังลงชื่อเข้าใช้ด้วย</p>
+        <div>
+          <input hidden
+          class="input-hide"
+          id="browseFileAnnonceProfile"
+          (change)="changeSelectedFile($event)"
+          type="file"
+      />
+  
+          <button *ngIf="modeMamage == 'EDIT'" (click)="clickBrowesFileBtn()" type="button" class="btn btn-photo"><img style="width: 25px" src="assets/icon/photo-camera.png"  alt="..."></button>
+  
+        </div>
+        <img style="width: 100px" [src]="fileRender" class="rounded-circle" onerror="src='assets/user/user.png'" alt="">
+        <form class="row g-3 needs-validation" novalidate>
+          <div >
+  
+           <div class="mb-3 mt-5 row">
+            <div class="mb-3">
+              <label for="inputName" class="form-label">ชื่อ</label>
+              <h6 *ngIf="modeMamage == 'NO_EDIT'">{{formModel.fullName}}</h6>
+              <input *ngIf="modeMamage == 'EDIT'" class="form-control"  [(ngModel)]="formModel.fullName" type="text"  id="inputName" name="inputName" required>
+            </div>
+          </div>
+  
+           <div class="mb-3 row">
+             <div class="mb-3">
+               <label for="inputEmailaddress" class="form-label">อีเมลล์</label>
+               <h6 *ngIf="modeMamage == 'NO_EDIT'">{{formModel.email}}</h6>
+               <input *ngIf="modeMamage == 'EDIT'" [(ngModel)]="formModel.email" type="email" class="form-control" id="inputEmailaddress" name="inputEmailaddress" placeholder="name@example.com" required>
+             </div>
+           </div>
+  
+          </div>
+         </form>
+  
+      </div>
+    </div>
+      </div>
+    </div>
+  
+  
+  
+  </div>
+  

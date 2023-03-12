@@ -1,0 +1,56 @@
+<div class="modal fade " id="joinClassModalId" tabindex="-1" aria-labelledby="messageAlertModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">เข้าร่วมชั้นเรียน</h1>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+           <div class="card w-100">
+          <div class="card-body">
+            <p class="fst-normal">ขณะนี้คุณกำลังลงชื่อเข้าใช้ด้วย</p>
+            <img style="width: 100px"onerror="src='assets/user/user.png'" [src]="user.filePath"class="rounded-circle" alt="...">
+            <label>
+              <div class="p-3">
+                <b>{{user.fullName}}</b>
+                <p class="mb-0" class="fw-normal">{{user.email}}</p>
+              </div>
+              </label>
+          </div>
+        </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-lg-6 offset-lg-3">
+           <div class="card w-100">
+          <div class="card-body">
+            <p class="fw-bold">รหัสชั้นเรียน</p>
+            <p class="fst-normal">ขอรหัสชั้นเรียนจากครู แล้วป้อนรหัสที่นี่</p>
+
+            <form class="joinclassroom-needs-validation" novalidate>
+              <div class="mb-3 row">
+              <div class="col-lg-6">
+                <input [(ngModel)]="joinClassCode" type="text" class="form-control" id="inputKeyClassroom" name="inputKeyClassroom" placeholder="รหัสชั้นเรียน" required>
+              </div>
+              <div class="col-lg-6 text-center">
+                <button (click)="createJoinClassRoomByKey()" class="btn btn-primary px-5" type="button">เข้าร่วม</button>
+              </div>
+            </div>
+            </form>
+
+          </div>
+        </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

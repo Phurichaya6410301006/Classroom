@@ -1,0 +1,176 @@
+<div class="container-fluid p-3">
+
+    <div class="row">  <div class="col-lg-6 offset-lg-2" >
+       <!-- Card Detail Work -->
+      <div class="card w-100 card-new" >
+  
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-lg-1">
+              <h6 class="work-w">W</h6>
+            </div>
+            <div class="col-lg-11">
+              <div class="p-1">
+            <b class="text-ellipsis">{{workOwner?.subject}}</b>
+            <pre>{{workOwner?.description}}</pre>
+            <div><small style="color: grey;font-size: 12px;" class="mb-0" class="fw-normal text-ellipsis">{{workOwner?.userUpdateDate | date : 'dd/MM/YYYY HH:mm'}}</small></div>
+  
+          </div>
+            </div>
+          </div>
+          <!-- <button  (click)="showAlertConfirmDeleteAnnounce(workOwner)" type="button" class="btn-close btn-close-absolute"  aria-label="Close"></button> -->
+  
+        </div>
+        <div class="card-footer"  *ngIf="workOwner?.listFile?.length > 0">
+  
+          <div class="row" *ngFor="let fileData of workOwner?.listFile">
+            <div class="col-lg-auto m-1">
+              <img style="width: 15px" src="assets/icon/paperclip.png"  alt="...">
+            </div>
+            <div class="col-lg-auto m-1 me-auto">
+              <a (click)="openFileNewTab(fileData?.filePath)" style="max-width: 500px;" class="fw-normal cursor-pointer text-ellipsis">{{fileData?.fileName}}</a>
+            </div>
+            <div class="col-lg-auto m-1">
+              <img (click)="showAlertConfirmDeleteFile(fileData)" class="cursor-pointer" style="width: 20px" src="assets/icon/delete.png"  alt="...">
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+      <!-- =============== Manage Score Member ===================== -->
+      <div class="row my-3" *ngFor="let item of listMemberUser;let index=index">
+        <div class="col-lg-12">
+          <div class="card w-100" [ngClass]="{'bg-red-score': isNotSubmit(item?.workScore),'bg-blue-score': isSubmit(item?.workScore),'bg-green-score': isCheckSubmit(item?.workScore) }">
+  
+            <div class="card-body" >
+  
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="d-flex w-50">
+                <div>
+                <img style="width: 50px" onerror="src='assets/user/user.png'" [src]="item?.user?.filePath" class="rounded-circle" alt="...">
+              </div>
+              <div class="p-1">
+                <b class="text-ellipsis">{{item?.user?.fullName}}</b>
+                <div><strong  class="mb-0" [ngClass]="{'text-danger': isNotSubmit(item?.workScore),'text-primary': isSubmit(item?.workScore),'text-success': isCheckSubmit(item?.workScore) }" >{{getNameStatus(item.workScore)}}</strong></div>
+  
+              </div>
+              </div>
+                </div>
+  
+                <div class="col-lg-4">
+                  <input *ngIf="!isNotSubmit(item?.workScore)" [(ngModel)]="item.workScore.score" type="number" class="form-control" id="inputScore{{index}}" name="inputScore{{index}}" required>
+                  <button (click)="updatescore(item?.workScore)" *ngIf="!isNotSubmit(item?.workScore)" class="btn btn-primary px-5 my-2 w-100" type="button">{{isSubmit(item?.workScore) ? 'ตรวจ' : 'แก้ไขคะแนน'}} </button>
+                </div>
+              </div>
+  
+  
+            </div>
+  
+            <div class="card-footer"  *ngIf="item?.workScore?.listFile?.length > 0">
+  
+              <div class="row" *ngFor="let fileData of item?.workScore?.listFile">
+                <div class="col-lg-auto m-1">
+                  <img style="width: 15px" src="assets/icon/paperclip.png"  alt="...">
+                </div>
+                <div class="col-lg-auto m-1 me-auto">
+                  <a (click)="openFileNewTab(fileData?.filePath)" style="max-width: 500px;" class="fw-normal cursor-pointer text-ellipsis">{{fileData?.fileName}}</a>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+       <div class="col-lg-2">
+  
+      <div class="card w-100 bg-blue border-0 mb-3" >
+        <div class="card-body">
+          <p class="fst-normal text-light">{{classRoomOwner?.nameClassRoom}}</p>
+          <h6 class="text-light">{{classRoomOwner?.classRoomNumber}}</h6>
+  
+        </div>
+      </div>
+  
+      <button (click)="showAlertConfirmDeleteAnnounce(workOwner)" type="button" class="btn btn-danger w-100 mb-3">ลบงาน</button>
+  
+      <button (click)="openAnnounceModal('WORK','EDIT',workOwner)" type="button" class="btn btn-success w-100 mb-3">แก้ไขงาน</button>
+  
+      <div class="card w-100 mb-3 card-border-red" >
+        <div class="card-body">
+          <p class="fst-normal">สถานะยังไม่ส่ง</p>
+          <h6 class="text-danger">{{countNotSubmit}}</h6>
+  
+        </div>
+      </div>
+  
+      <div class="card w-100 mb-3 card-border-blue" >
+        <div class="card-body">
+          <p class="fst-normal">สถานะส่งแล้ว (รอตรวจ)</p>
+          <h6 class="text-primary">{{countSubmit}}</h6>
+  
+        </div>
+      </div>
+  
+      <div class="card w-100 mb-3 card-border-green">
+        <div class="card-body">
+          <p class="fst-normal">สถานะตรวจแล้ว</p>
+          <h6 class="text-success">{{countCheckSubmit}}</h6>
+  
+        </div>
+      </div>
+  
+      <button (click)="backClassroomOwner()" type="button" class="btn btn-outline-secondary w-100 mb-3">กลับห้องเรียน</button>
+  
+    </div>
+  
+    </div>
+  
+  </div>
+  
+  <!-- ======================= Alert ======================================= -->
+  <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+    <div id="alertConfirmDeleteFileId"  class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">ยืนยัน</strong>
+        <button type="button" class="btn-close"  (click)="closeAlertConfirmDeleteFile()" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        คุณต้องการลบไฟล์ใช่ หรือไม่ ?
+        <div class="mt-4 row">
+          <div class="d-flex justify-content-between">
+            <button  (click)="closeAlertConfirmDeleteFile()" type="button" class="btn btn-light px-5 my-2">Cancel</button>
+            <button  (click)="confirmDeletlFile()" class="btn btn-danger px-5 my-2" type="button">Delete</button>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+    <div id="alertConfirmDeleteAnnounceId"  class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">ยืนยัน</strong>
+        <button type="button" class="btn-close"  (click)="closeAlertConfirmDeleteAnnounce()" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        คุณต้องการลบงานนี้ ใช่ หรือไม่ ?
+        <div class="mt-4 row">
+          <div class="d-flex justify-content-between">
+            <button  (click)="closeAlertConfirmDeleteAnnounce()" type="button" class="btn btn-light px-5 my-2">Cancel</button>
+            <button  (click)="confirmDeletlAnnounce()" class="btn btn-danger px-5 my-2" type="button">Delete</button>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <app-announce-manage [mode]="modeAnnounceModal" [announceOrWorkId]="announceOrWorkId" [(announceModalVisible)]="announceModalVisible" [announceOrWork]="announceOrWork" (returnEventCreate)="getListClassRoomAnnounceAndWork()"></app-announce-manage>
+  
+  

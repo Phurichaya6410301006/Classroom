@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+.no-results{
+    width: 100%;
+    width: 100%;
+    text-align: center;
+    padding-top: 10%;
+  }
+  
+  .img-no-results{
+    width: 150px;
+  }
+  
+  .text-ellipsis{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .cursor-pointer{
+    cursor: pointer;
+  }
+  
+  .toast {
+    position: fixed;
+    top: 35%;
+    --bs-toast-bg: white;
+  }
+  
+  .btn-close-absolute{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+  
+  .offcanvas-backdrop {
+    background-color: transparent ;
+  }
+  
+  .bg-blue{
+    background-color: #0d6efd;
+  }
+  
+  .card-border-red{
+    --bs-card-border-color: red;
+  }
+  
+  .card-border-blue{
+    --bs-card-border-color: blue;
+  }
+  
+  .card-border-green{
+    --bs-card-border-color: rgb(2, 190, 2);
+  }
+  
+  .work-w{
+    background-color: #ff8a0f;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      padding-top: 14px;
+      border-radius: 100%;
+      font-size: 28px;
+  }
+  
+  
+  

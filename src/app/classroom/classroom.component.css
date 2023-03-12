@@ -1,0 +1,43 @@
+.manage{
+    position: fixed;
+    bottom: 150px;
+    right: 0px;
+  }
+  
+  .btn-manage{
+    border-radius: 100%;
+      font-size: 30px;
+      color: white;
+      /* box-shadow: 0px 0px 0px 1px darkgrey; */
+  }
+  
+  .dropdown-item{
+    cursor: pointer;
+  }
+  
+  .card-body{
+    height: 150px;
+  }
+  
+  .card-text{
+    display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+  }
+  
+  .card-header {
+    min-height: 81px;
+  }
+  
+  .card:hover{
+    cursor: pointer;
+    box-shadow: 0px 2px 4px -2px;
+  }
+  
+  .card:active{
+    box-shadow: 0px 0px 0px 0px;
+    opacity: 0.6;
+  }
+  
+  

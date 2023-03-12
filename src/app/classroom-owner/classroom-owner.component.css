@@ -1,0 +1,63 @@
+.nav-tabs {
+    display: flex;
+    top: 18px;
+    z-index: 1030;
+    justify-content: center;
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    --bs-nav-tabs-border-color: none;
+  }
+  
+  .card-new:hover{
+    cursor: pointer;
+    box-shadow: 0px 2px 4px -2px;
+  }
+  
+  .card-new:active{
+    box-shadow: 0px 0px 0px 0px;
+    opacity: 0.6;
+  }
+  
+  .btn-add{
+    position: absolute;
+    top: 0;
+    right: 30px;
+    bottom: 0;
+    margin: auto;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d6efd;
+  }
+  
+  .btn-add:hover{
+    box-shadow: 0px 0px 0px 2px #3f51b5;
+  }
+  
+  .btn-add:active{
+  
+    box-shadow: 0px 0px 0px 2px #3f51b5;
+    opacity: 0.5;
+  }
+  
+  .btn-edit-absolute{
+    position: absolute;
+    top: 5px;
+    right: 35px;
+    background: transparent  url('./../../assets/icon/pencil.png') center/1em auto no-repeat;;
+  }
+  
+  .btn-view-absolute{
+    position: absolute;
+    top: 5px;
+    right: 65px;
+    background: transparent  url('./../../assets/icon/view.png') center/1em auto no-repeat;;
+  }
+  
+  

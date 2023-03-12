@@ -1,0 +1,19 @@
+
+.bg-red-score{
+    /* background-color: #ff000033; */
+    border-top: 10px solid red;
+    box-shadow: 0px -1px 1px 0px #cbcbcb;
+  }
+  
+  .bg-green-score{
+    /* background-color: #2aef4233; */
+    border-top: 10px solid green;
+    box-shadow: 0px -1px 1px 0px #cbcbcb;
+  }
+  
+  .bg-blue-score{
+    /* background-color: #0e6efb2e; */
+    border-top: 10px solid blue;
+    box-shadow: 0px -1px 1px 0px #cbcbcb;
+  }
+  

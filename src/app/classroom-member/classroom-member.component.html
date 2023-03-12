@@ -1,0 +1,228 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active px-5" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">สตรีม</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link px-5" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">งานของชั้นเรียน</button>
+    </li>
+  </ul>
+  <div class="tab-content p-3" id="myTabContent">
+  
+    <!-- =================================  สตรีม ==================================== -->
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+  
+      <div class="row my-3">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="card w-100 bg-blue border-0">
+            <div class="card-body">
+              <p class="fst-normal text-light">{{classRoomMember?.nameClassRoom}}</p>
+              <h6 class="text-light">{{classRoomMember?.classRoomNumber}}</h6>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- <div class="col-lg-2 offset-lg-2">
+          <div class="card w-100" >
+            <div class="card-body">
+              <p class="fst-normal">รหัสชั้นเรียน</p>
+              <h6 class="text-primary">{{classRoomMember?.keyClassRoom}}</h6>
+  
+            </div>
+          </div>
+        </div> -->
+        <div class="col-lg-8 offset-lg-2">
+          <div class="card card-new w-100" (click)="openAnnounceModal('ANNOUNCE','CREATE')">
+            <div class="card-body">
+              <img style="width: 50px" onerror="src='assets/user/user.png'" [src]="userInfo?.filePath" class="rounded-circle" alt="...">
+              <label>
+                <div class="p-3">
+                  <p class="mb-0" class="fw-normal text-secondary cursor-pointer">ประกาศบางสิ่งในชั้นเรียน</p>
+                </div>
+                </label>
+  
+            </div>
+          </div>
+  
+          <div class="row my-3" *ngFor="let item of classRoomMember?.listAnnounceAndWork">
+            <div class="col-lg-12">
+              <div class="card w-100" *ngIf="item?.announceOrWork == 'ANNOUNCE'">
+  
+                <div class="card-body ">
+                  <div class="d-flex w-100">
+                    <div>
+                    <img style="width: 50px" onerror="src='assets/user/user.png'" [src]="item?.userCreate?.filePath"  class="rounded-circle" alt="...">
+                  </div>
+                  <div class="p-1">
+                    <b class="text-ellipsis">{{item?.userCreate?.fullName}}</b>
+                    <div><small style="color: grey;font-size: 12px;" class="mb-0" class="fw-normal text-ellipsis">{{item?.userUpdateDate | date : 'dd/MM/YYYY HH:mm'}}</small></div>
+  
+                  </div>
+                  </div>
+  
+                  <div class="mt-2" >
+                    <pre>{{item?.description}}</pre>
+                  </div>
+                  <button *ngIf="item?.userCreateId == acoutLoginUserId" (click)="openAnnounceModal('ANNOUNCE','EDIT',item)" type="button" class="btn-close btn-edit-absolute"  aria-label="Close"></button>
+  
+                  <button *ngIf="item?.userCreateId == acoutLoginUserId"  (click)="showAlertConfirmDeleteAnnounce(item)" type="button" class="btn-close btn-close-absolute"  aria-label="Close"></button>
+                </div>
+  
+                <div class="card-footer"  *ngIf="item?.listFile?.length > 0">
+  
+                  <div class="row" *ngFor="let fileData of item?.listFile">
+                    <div class="col-lg-auto m-1">
+                      <img style="width: 15px" src="assets/icon/paperclip.png"  alt="...">
+                    </div>
+                    <div class="col-lg-auto m-1 me-auto">
+                      <a (click)="openFileNewTab(fileData?.filePath)" style="max-width: 500px;" class="fw-normal cursor-pointer text-ellipsis">{{fileData?.fileName}}</a>
+                    </div>
+                    <div *ngIf="item?.userCreateId == acoutLoginUserId" class="col-lg-auto m-1">
+                      <img (click)="showAlertConfirmDeleteFile(fileData)" class="cursor-pointer" style="width: 20px" src="assets/icon/delete.png"  alt="...">
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+  
+              <div class="card w-100 card-new" *ngIf="item?.announceOrWork == 'WORK'">
+  
+                <div class="card-body " (click)="gotoPageManageWork(item?._id)">
+                  <div class="row">
+                    <div class="col-lg-1">
+                      <h6 class="work-w">W</h6>
+                    </div>
+                    <div class="col-lg-11">
+                      <div class="p-1 px-4">
+                    <b class="text-ellipsis">{{item?.subject}}</b>
+                    <pre>{{item?.description}}</pre>
+                    <div><small style="color: grey;font-size: 12px;" class="mb-0" class="fw-normal text-ellipsis">{{item?.userUpdateDate | date : 'dd/MM/YYYY HH:mm'}}</small></div>
+  
+                  </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer"  *ngIf="item?.listFile?.length > 0">
+  
+                  <div class="row" *ngFor="let fileData of item?.listFile">
+                    <div class="col-lg-auto m-1">
+                      <img style="width: 15px" src="assets/icon/paperclip.png"  alt="...">
+                    </div>
+                    <div class="col-lg-auto m-1 me-auto">
+                      <a (click)="openFileNewTab(fileData?.filePath)" style="max-width: 500px;" class="fw-normal cursor-pointer text-ellipsis">{{fileData?.fileName}}</a>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+  
+    </div>
+  
+     <!-- =================================  งานของชั้นเรียน ==================================== -->
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+      <div class="row my-3">
+        <div class="col-lg-8 offset-lg-2">
+          <div  class="card w-100 bg-blue border-0 card-new" >
+            <div class="card-body">
+              <p class="fst-normal text-light">{{classRoomMember?.nameClassRoom}}</p>
+              <h6 class="text-light">{{classRoomMember?.classRoomNumber}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+      <div class="row" *ngFor="let item of classRoomMember?.listAnnounceAndWork">
+        <div class="col-lg-8 offset-lg-2 my-3" *ngIf="item?.announceOrWork == 'WORK'">
+  
+          <div class="card w-100 card-new" (click)="gotoPageManageWork(item?._id)">
+  
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-lg-1">
+                  <h6 class="work-w">W</h6>
+                </div>
+                <div class="col-lg-11">
+                  <div class="p-1">
+                <b class="text-ellipsis">{{item?.subject}}</b>
+                <pre>{{item?.description}}</pre>
+                <div><small style="color: grey;font-size: 12px;" class="mb-0" class="fw-normal text-ellipsis">{{item?.userUpdateDate | date : 'dd/MM/YYYY HH:mm'}}</small></div>
+  
+              </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer"  *ngIf="item?.listFile?.length > 0">
+  
+              <div class="row" *ngFor="let fileData of item?.listFile">
+                <div class="col-lg-auto m-1">
+                  <img style="width: 15px" src="assets/icon/paperclip.png"  alt="...">
+                </div>
+                <div class="col-lg-auto m-1 me-auto">
+                  <a (click)="openFileNewTab(fileData?.filePath)" style="max-width: 500px;" class="fw-normal cursor-pointer text-ellipsis">{{fileData?.fileName}}</a>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>
+  
+  
+  <app-announce-manage [mode]="modeAnnounceModal" [announceOrWorkId]="announceOrWorkId" [(announceModalVisible)]="announceModalVisible" [announceOrWork]="announceOrWork" (returnEventCreate)="getListClassRoomAnnounceAndWork()"></app-announce-manage>
+  
+  <!-- ======================= Alert ======================================= -->
+  <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+    <div id="alertConfirmDeleteFileId"  class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">ยืนยัน</strong>
+        <button type="button" class="btn-close"  (click)="closeAlertConfirmDeleteFile()" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        คุณต้องการลบไฟล์ใช่ หรือไม่ ?
+        <div class="mt-4 row">
+          <div class="d-flex justify-content-between">
+            <button  (click)="closeAlertConfirmDeleteFile()" type="button" class="btn btn-light px-5 my-2">Cancel</button>
+            <button  (click)="confirmDeletlFile()" class="btn btn-danger px-5 my-2" type="button">Delete</button>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+    <div id="alertConfirmDeleteAnnounceId"  class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">ยืนยัน</strong>
+        <button type="button" class="btn-close"  (click)="closeAlertConfirmDeleteAnnounce()" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        คุณต้องการลบ ใช่ หรือไม่ ?
+        <div class="mt-4 row">
+          <div class="d-flex justify-content-between">
+            <button  (click)="closeAlertConfirmDeleteAnnounce()" type="button" class="btn btn-light px-5 my-2">Cancel</button>
+            <button  (click)="confirmDeletlAnnounce()" class="btn btn-danger px-5 my-2" type="button">Delete</button>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

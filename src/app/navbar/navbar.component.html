@@ -1,0 +1,72 @@
+<!-- <nav class="navbar navbar-expand-lg bg-light border">
+  <div class="container-fluid">
+    <a class="navbar-brand" >Student Room</a>
+    <form class="d-flex" role="search">
+      <img src="favicon.ico" class="rounded-circle" alt="...">
+    </form>
+  </div>
+</nav> -->
+
+<nav class="navbar bg-light fixed-top">
+    <div class="container-fluid">
+  
+     <div>
+      <button (click)="getListClassRoomJoin()" class="navbar-toggler me-3" type="button" data-bs-toggle="offcanvas"  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <label class="navbar-brand">ห้องเรียน</label>
+     </div>
+  
+     <div class="btn-group dropstart">
+      <button class="avata-cicle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img onerror="src='assets/user/user.png'" [src]="user.filePath" class="rounded-circle w-100" alt="...">
+      </button>
+      <ul class="dropdown-menu">
+        <li><b class="mx-2">{{user.fullName}}</b></li>
+  
+        <li><hr class="dropdown-divider"></li>
+        <li><a (click)="usermanagment()" class="dropdown-item cursor-pointer">จัดการบัญชีผู้ใช้</a></li>
+        <li><a (click)="logOut()" class="dropdown-item cursor-pointer">ออกจากระบบ</a></li>
+  
+      </ul>
+    </div>
+  
+  
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <!-- <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div> -->
+        <div class="offcanvas-body">
+          <div class="list-lef-menu">
+            <a data-bs-toggle="offcanvas"  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+            (click)="goToClassroom()" class="list-group-item list-group-item-action">
+              <img class="img-menu" src="assets/icon/presentation.png" alt=""> ชั้นเรียน</a>
+  
+            <a *ngIf="listClassRoomOwner.length != 0" class="list-group-divider"></a>
+  
+            <div *ngIf="listClassRoomOwner.length != 0" class="offcanvas-header">
+                <b class="offcanvas-title" id="offcanvasNavbarLabel">การสอน</b>
+             </div>
+  
+            <!-- <a data-bs-toggle="offcanvas"  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" *ngIf="listClassRoomOwner.length != 0" class="list-group-item list-group-item-action  p-1"> <img class="img-menu" src="assets/icon/folder.png" alt=""> รอการตรวจ</a> -->
+  
+            <a (click)="goToClassroomowner(item)"
+            data-bs-toggle="offcanvas"  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+            *ngFor="let item of listClassRoomOwner" class="list-group-item list-group-item-action text-ellipsis p-1">
+            <img class="img-menu" src="assets/icon/paper.png" alt=""> {{item?.classroom?.nameClassRoom}}</a>
+  
+            <a class="list-group-divider"></a>
+            <div class="offcanvas-header">
+              <b class="offcanvas-title" id="offcanvasNavbarLabel">ลงทะเบียน</b>
+           </div>
+           <!-- <a data-bs-toggle="offcanvas"  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" class="list-group-item list-group-item-action  p-1"> <img class="img-menu" src="assets/icon/folder.png" alt=""> สิ่งที่ต้องทำ</a> -->
+  
+           <a data-bs-toggle="offcanvas"  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"  (click)="goToClassroomember(item)" *ngFor="let item of listClassRoomMember" class="list-group-item list-group-item-action text-ellipsis p-1"> <img class="img-menu" src="assets/icon/paper.png" alt=""> {{item?.classroom?.nameClassRoom}}</a>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
